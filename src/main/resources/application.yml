@@ -1,1 +1,32 @@
 # Default properties file. Overridable by specific environment properties files. eg.: application-development.yml
+server:
+  timezone: America/Sao_Paulo
+  servlet:
+    context-path: /api
+  error:
+    include-message: always
+    include-stacktrace: never
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: ShoppingLists
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+
+security:
+  authorization:
+    jwt:
+      header: ${AUTH_JWT_HEADER}
+      secret: ${AUTH_JWT_SECRET}
+      ignore-paths: ${AUTH_JWT_IGNORE_PATHS}
+  web:
+    cors:
+      allow-credentials: true
+      allowed-origins: ${FRONT_END_ORIGIN}
+      allowed-methods: GET, POST, PATCH, PUT, DELETE, OPTIONS
+      exposed-headers: ${AUTH_JWT_HEADER}
+      allowed-headers: \*
+      token-max-age: 3600

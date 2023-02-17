@@ -7,22 +7,18 @@ import jakarta.servlet.FilterChain
 import jakarta.servlet.ServletException
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
-import java.io.IOException
-import java.nio.charset.StandardCharsets.UTF_8
-import javax.crypto.SecretKey
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
+import java.io.IOException
+import java.nio.charset.StandardCharsets.UTF_8
+import javax.crypto.SecretKey
 
 
-@Component
 class JwtTokenValidatorFilter(
-    @Value("\${application.name}")
     private val applicationName: String,
     private val jwtProperties: JwtProperties
 ) : OncePerRequestFilter() {

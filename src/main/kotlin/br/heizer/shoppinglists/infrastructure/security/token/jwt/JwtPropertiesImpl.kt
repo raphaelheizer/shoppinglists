@@ -5,12 +5,12 @@ import org.springframework.stereotype.Component
 
 @Component
 class JwtPropertiesImpl : JwtProperties {
-    @Value("\${auth.jwt.header}")
+    @Value("\${security.authorization.jwt.header}")
     override lateinit var jwtHeader: String
 
-    @Value("\${auth.jwt.secret}")
+    @Value("\${security.authorization.jwt.secret}")
     override lateinit var jwtSecret: String
 
-    @Value("jwtIgnorePaths")
-    override lateinit var jwtIgnorePaths: Set<String>
+    @Value("\${security.authorization.jwt.ignore-paths}")
+    override lateinit var jwtIgnorePaths: List<String>
 }
