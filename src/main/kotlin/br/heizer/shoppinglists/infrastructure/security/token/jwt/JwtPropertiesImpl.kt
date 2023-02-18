@@ -12,5 +12,5 @@ class JwtPropertiesImpl : JwtProperties {
     override lateinit var jwtSecret: String
 
     @Value("\${security.authorization.jwt.ignore-paths}")
-    override lateinit var jwtIgnorePaths: List<String>
+    override lateinit var jwtIgnorePaths: Set<String>
 }

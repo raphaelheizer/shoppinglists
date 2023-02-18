@@ -2,6 +2,7 @@ package br.heizer.shoppinglists.modules.users
 
 import br.heizer.shoppinglists.infrastructure.security.authentication.Role
 import br.heizer.shoppinglists.infrastructure.security.user.UserCredentials
+import br.heizer.shoppinglists.infrastructure.validators.secureurl.SecureUrl
 import org.springframework.data.mongodb.core.mapping.MongoId
 
 class User(
@@ -12,6 +13,9 @@ class User(
 
     override val password: String,
 
-    override val roles: List<Role>
+    override val roles: List<Role>,
+
+    @SecureUrl
+    val avatarUrl: String
 
 ) : UserCredentials
