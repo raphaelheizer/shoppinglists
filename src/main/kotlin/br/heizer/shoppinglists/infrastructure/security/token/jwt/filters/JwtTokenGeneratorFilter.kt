@@ -33,13 +33,13 @@ class JwtTokenGeneratorFilter(
                         .and()
                         .build()
 
-            response.setHeader(jwtProperties.jwtHeader, jwt)
+            response.setHeader(jwtProperties.header, jwt)
         }
         filterChain.doFilter(request, response)
     }
 
     override fun shouldNotFilter(request: HttpServletRequest): Boolean {
-        return !jwtProperties.jwtIgnorePaths.contains(request.servletPath)
+        return !jwtProperties.ignorePaths.contains(request.servletPath)
     }
 
     private fun populateAuthorities(collection: Collection<GrantedAuthority>): String? {

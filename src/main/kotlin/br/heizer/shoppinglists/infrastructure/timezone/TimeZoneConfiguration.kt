@@ -14,7 +14,7 @@ class TimeZoneConfiguration {
 
     @PostConstruct
     fun initialize() {
-        Logger.getGlobal().info("Server timezone set to $serverTimeZone")
+        Logger.getGlobal().info("Server timezone is set to $serverTimeZone")
         TimeZone.setDefault(TimeZone.getTimeZone(serverTimeZone))
     }
 }

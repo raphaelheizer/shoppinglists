@@ -1,0 +1,50 @@
+server:
+  timezone: America/Sao_Paulo
+  port: ${PORT:8080}
+
+  servlet:
+    context-path: /dev-api
+
+  error:
+    include-message: always
+    include-stacktrace: always
+    include-exception: true
+
+spring:
+  application:
+    name: ShoppingLists - Development
+
+  data:
+    mongodb:
+      host: ${MONGODB_HOST_DEVELOPMENT}
+      port: ${MONGODB_PORT_DEVELOPMENT:${MONGODB_PORT}:27017}
+      database: ${MONGODB_DATABASE_NAME_DEVELOPMENT}
+      username: ${MONGODB_USERNAME_DEVELOPMENT}
+      password: ${MONGODB_PASSWORD_DEVELOPMENT}
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: debug
+        security: info
+
+security:
+  authorization:
+    jwt:
+      header: ${AUTH_JWT_HEADER}
+      secret: ${AUTH_JWT_SECRET_DEVELOPMENT}
+      ignore-paths: ${AUTH_JWT_IGNORE_PATHS}
+
+  web:
+    cors:
+      allow-credentials: true
+      allowed-origins: ${FRONT_END_ORIGIN_DEVELOPMENT}
+      allowed-resource-origins: ${ALLOWED_RESORUCE_ORIGINS_DEVELOPMENT}
+      allowed-methods: GET, POST, PATCH, PUT, DELETE, OPTIONS
+      exposed-headers: ${AUTH_JWT_HEADER}
+      allowed-headers: \*
+      token-max-age: 3600

@@ -27,7 +27,7 @@ class JwtTokenValidatorFilter(
     @Throws(ServletException::class, IOException::class)
 
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
-        val jwt = request.getHeader(jwtProperties.jwtHeader)
+        val jwt = request.getHeader(jwtProperties.header)
         if (null != jwt) {
             when {
                 jwt.startsWith(bearerTokenPrefix) -> decodeAsBearer(jwt)
@@ -44,7 +44,7 @@ class JwtTokenValidatorFilter(
     private fun decodeJwt(jwt: String) {
         try {
             val key: SecretKey = Keys.hmacShaKeyFor(
-                jwtProperties.jwtSecret.toByteArray(UTF_8)
+                jwtProperties.secret.toByteArray(UTF_8)
             )
 
             val claims = JwtUtilities
@@ -72,6 +72,6 @@ class JwtTokenValidatorFilter(
     }
 
     override fun shouldNotFilter(request: HttpServletRequest): Boolean {
-        return jwtProperties.jwtIgnorePaths.contains(request.servletPath)
+        return jwtProperties.ignorePaths.contains(request.servletPath)
     }
 }

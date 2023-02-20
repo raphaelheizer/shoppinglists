@@ -1,20 +1,26 @@
 # Default properties file. Overridable by specific environment properties files. eg.: application-development.yml
 server:
   timezone: America/Sao_Paulo
+  port: ${PORT:8080}
+
   servlet:
     context-path: /api
+
   error:
     include-message: always
     include-stacktrace: never
-  port: ${PORT:8080}
 
 spring:
   application:
     name: ShoppingLists
-  datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USER}
-    password: ${DATABASE_PASSWORD}
+
+  data:
+    mongodb:
+      host: ${MONGODB_HOST}
+      port: ${MONGODB_PORT:27017}
+      database: ${MONGODB_DATABASE_NAME}
+      username: ${MONGODB_USERNAME}
+      password: ${MONGODB_PASSWORD}
 
 security:
   authorization:
@@ -22,6 +28,7 @@ security:
       header: ${AUTH_JWT_HEADER}
       secret: ${AUTH_JWT_SECRET}
       ignore-paths: ${AUTH_JWT_IGNORE_PATHS}
+
   web:
     cors:
       allow-credentials: true

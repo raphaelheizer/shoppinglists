@@ -2,20 +2,24 @@ package br.heizer.shoppinglists.modules.users
 
 import br.heizer.shoppinglists.infrastructure.security.authentication.Role
 import br.heizer.shoppinglists.infrastructure.security.user.UserCredentials
-import br.heizer.shoppinglists.infrastructure.validators.secureurl.SecureUrl
+import com.fasterxml.jackson.annotation.JsonIgnore
+import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.MongoId
 
+@Document(collection = "user")
 class User(
     @MongoId
-    val id: String,
+    val id: String? = null,
 
     override val email: String,
 
-    override val password: String,
+    @JsonIgnore
+    override var password: String,
 
     override val roles: List<Role>,
 
-    @SecureUrl
-    val avatarUrl: String
+    avatarUrl: String
 
-) : UserCredentials
+) : UserCredentials {
+    val avatarUrl: String = avatarUrl.filterNot { it in listOf('<', '>') } // TODO: Criar @Annotation que faça um AnnotationProcessor gerar código pra criar um delegate que escreva um suplemento de código para fazer essa filtragem. Criar uma classe estática e "redirecionar" o setter/construtor para fazer isso
+}
