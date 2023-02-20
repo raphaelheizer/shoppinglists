@@ -1,7 +1,7 @@
 # Default properties file. Overridable by specific environment properties files. eg.: application-development.yml
 server:
   timezone: America/Sao_Paulo
-  port: ${PORT:8080}
+  port: ${APPLICATION_PORT:8080}
 
   servlet:
     context-path: /api
