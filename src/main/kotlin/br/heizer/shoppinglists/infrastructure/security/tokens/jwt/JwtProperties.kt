@@ -1,4 +1,4 @@
-package br.heizer.shoppinglists.infrastructure.security.token.jwt
+package br.heizer.shoppinglists.infrastructure.security.tokens.jwt
 
 interface JwtProperties {
     val header: String

@@ -3,8 +3,8 @@ package br.heizer.shoppinglists.modules.authentication
 import br.heizer.shoppinglists.infrastructure.security.authentication.AuthenticationProvider
 import br.heizer.shoppinglists.infrastructure.security.authentication.AuthenticationToken
 import br.heizer.shoppinglists.infrastructure.security.authentication.Role
-import br.heizer.shoppinglists.infrastructure.security.token.jwt.JwtProperties
-import br.heizer.shoppinglists.infrastructure.security.token.jwt.JwtUtilities
+import br.heizer.shoppinglists.infrastructure.security.tokens.jwt.JwtProperties
+import br.heizer.shoppinglists.infrastructure.security.tokens.jwt.JwtUtilities
 import br.heizer.shoppinglists.infrastructure.security.user.UserDetailsService
 import br.heizer.shoppinglists.infrastructure.security.user.exceptions.UserNotFoundException
 import br.heizer.shoppinglists.modules.users.User

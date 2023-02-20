@@ -1,9 +1,9 @@
 package br.heizer.shoppinglists.infrastructure.security.web
 
 import br.heizer.shoppinglists.infrastructure.security.csrf.CsrfCookieFilter
-import br.heizer.shoppinglists.infrastructure.security.token.jwt.JwtProperties
-import br.heizer.shoppinglists.infrastructure.security.token.jwt.filters.JwtTokenGeneratorFilter
-import br.heizer.shoppinglists.infrastructure.security.token.jwt.filters.JwtTokenValidatorFilter
+import br.heizer.shoppinglists.infrastructure.security.tokens.jwt.JwtProperties
+import br.heizer.shoppinglists.infrastructure.security.tokens.jwt.filters.JwtTokenGeneratorFilter
+import br.heizer.shoppinglists.infrastructure.security.tokens.jwt.filters.JwtTokenValidatorFilter
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

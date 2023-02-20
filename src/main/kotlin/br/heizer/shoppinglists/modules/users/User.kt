@@ -2,10 +2,12 @@ package br.heizer.shoppinglists.modules.users
 
 import br.heizer.shoppinglists.infrastructure.security.authentication.Role
 import br.heizer.shoppinglists.infrastructure.security.user.UserCredentials
+import br.heizer.shoppinglists.infrastructure.validators.nohtml.NoHtml
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.MongoId
 
+@NoHtml
 @Document(collection = "user")
 class User(
     @MongoId
@@ -20,6 +22,4 @@ class User(
 
     avatarUrl: String
 
-) : UserCredentials {
-    val avatarUrl: String = avatarUrl.filterNot { it in listOf('<', '>') } // TODO: Criar @Annotation que faça um AnnotationProcessor gerar código pra criar um delegate que escreva um suplemento de código para fazer essa filtragem. Criar uma classe estática e "redirecionar" o setter/construtor para fazer isso
-}
+) : UserCredentials

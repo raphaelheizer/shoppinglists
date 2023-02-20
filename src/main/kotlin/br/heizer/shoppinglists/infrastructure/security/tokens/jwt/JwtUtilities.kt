@@ -1,4 +1,4 @@
-package br.heizer.shoppinglists.infrastructure.security.token.jwt
+package br.heizer.shoppinglists.infrastructure.security.tokens.jwt
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.jsonwebtoken.JwtBuilder

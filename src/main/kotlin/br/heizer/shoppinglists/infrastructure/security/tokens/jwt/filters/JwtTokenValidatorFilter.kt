@@ -1,7 +1,7 @@
-package br.heizer.shoppinglists.infrastructure.security.token.jwt.filters
+package br.heizer.shoppinglists.infrastructure.security.tokens.jwt.filters
 
-import br.heizer.shoppinglists.infrastructure.security.token.jwt.JwtProperties
-import br.heizer.shoppinglists.infrastructure.security.token.jwt.JwtUtilities
+import br.heizer.shoppinglists.infrastructure.security.tokens.jwt.JwtProperties
+import br.heizer.shoppinglists.infrastructure.security.tokens.jwt.JwtUtilities
 import io.jsonwebtoken.security.Keys
 import jakarta.servlet.FilterChain
 import jakarta.servlet.ServletException
