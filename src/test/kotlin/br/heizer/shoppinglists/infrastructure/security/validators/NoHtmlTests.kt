@@ -1,8 +1,6 @@
 package br.heizer.shoppinglists.infrastructure.security.validators
 
 import br.heizer.shoppinglists.infrastructure.validators.nohtml.NoHtml
-import io.mockk.InternalPlatformDsl.toArray
-import jakarta.validation.ConstraintViolationException
 import jakarta.validation.Valid
 import jakarta.validation.Validation
 import org.junit.jupiter.api.Test
@@ -11,7 +9,7 @@ import org.junit.jupiter.api.assertThrows
 
 class NoHtmlTests {
 
-    internal class TestClass(
+    private class TestClass(
         @NoHtml
         val prop: String
     )
