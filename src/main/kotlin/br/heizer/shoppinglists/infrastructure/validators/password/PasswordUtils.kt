@@ -6,17 +6,17 @@ class PasswordUtils {
 
     companion object {
         private const val passwordStrengthValidation =
-            "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%^&*()_+\\-=\\[]\\{};':\"\\\\|,.<>/?])"
+            "^(?!\\[\\]\\<\\>\\;\\/\\\\)(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#\$%^&*()_+])[A-Za-z\\d!@#\$%^&*_+.]*\$"
+        const val minimumLength = 8
 
         @Throws(IllegalArgumentException::class)
         fun validateLength(password: String) {
-            val minimumLength = 8
             if (password.length < minimumLength)
                 throw IllegalArgumentException("Password length must be equal or greater than $minimumLength characters")
         }
 
         @Throws(IllegalArgumentException::class)
-        fun validatePasswordNotTooWeak(password: String) {
+        fun validatePasswordStrength(password: String) {
             if (!password.matches(passwordStrengthValidation.toRegex()))
                 throw IllegalArgumentException("Password is too weak")
         }
@@ -26,7 +26,7 @@ class PasswordUtils {
             password.also {
                 if (it == null) throw IllegalArgumentException("Password must not be null")
                 validateLength(it)
-                validatePasswordNotTooWeak(it)
+                validatePasswordStrength(it)
             }
     }
 }

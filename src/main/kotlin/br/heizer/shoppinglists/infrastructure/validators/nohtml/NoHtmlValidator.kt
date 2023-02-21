@@ -12,6 +12,6 @@ class NoHtmlValidator : ConstraintValidator<NoHtml, String> {
         doesNotContainHtml(value)
 
     private fun doesNotContainHtml(value: String?): Boolean =
-        value?.matches(validation.toRegex()) ?: true
+        (value?.matches(validation.toRegex())?.not()) ?: true
 
 }
