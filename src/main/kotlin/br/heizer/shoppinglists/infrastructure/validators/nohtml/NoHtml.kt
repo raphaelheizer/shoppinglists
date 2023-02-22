@@ -4,7 +4,11 @@ import jakarta.validation.Constraint
 import jakarta.validation.Payload
 import kotlin.reflect.KClass
 
-@Target(AnnotationTarget.FIELD, AnnotationTarget.CLASS)
+@Target(AnnotationTarget.FIELD, AnnotationTarget.CLASS,
+    AnnotationTarget.PROPERTY,
+    AnnotationTarget.VALUE_PARAMETER,
+    AnnotationTarget.PROPERTY_GETTER
+)
 @Retention(AnnotationRetention.RUNTIME)
 @Constraint(validatedBy = [NoHtmlValidator::class])
 annotation class NoHtml(

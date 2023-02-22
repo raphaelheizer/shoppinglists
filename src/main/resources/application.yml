@@ -33,7 +33,7 @@ security:
     cors:
       allow-credentials: true
       allowed-origins: ${FRONT_END_ORIGIN}
-      allowed-resource-origins: ${ALLOWED_RESORUCE_ORIGINS}
+      allowed-resource-origins: ${ALLOWED_RESOURCE_ORIGINS}
       allowed-methods: GET, POST, PATCH, PUT, DELETE, OPTIONS
       exposed-headers: ${AUTH_JWT_HEADER}
       allowed-headers: \*

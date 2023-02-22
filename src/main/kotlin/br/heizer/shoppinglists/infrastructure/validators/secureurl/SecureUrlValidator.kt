@@ -3,15 +3,17 @@ package br.heizer.shoppinglists.infrastructure.validators.secureurl
 import jakarta.validation.ConstraintValidator
 import jakarta.validation.ConstraintValidatorContext
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.stereotype.Component
 
+@Component
 class SecureUrlValidator : ConstraintValidator<SecureUrl, String> {
 
     @Value("\${security.web.cors.allowed-resource-origins}")
-    private lateinit var allowedResourceOrigins: Set<String>
+    var allowedResourceOrigins = setOf<String>()
 
     companion object {
         val secureUrlRegex =
-            Regex("^(https://)[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+([a-zA-Z0-9_\\-.,@?^=%&:/~+#]*[a-zA-Z0-9_\\-@?^=%&/~+#])?\$")
+            Regex("^(https://|wss://)[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+([a-zA-Z0-9_\\-.,@?^=%&:/~+#]*[a-zA-Z0-9_\\-@?^=%&/~+#])?\$")
     }
 
     override fun isValid(url: String?, context: ConstraintValidatorContext?): Boolean {
@@ -22,7 +24,5 @@ class SecureUrlValidator : ConstraintValidator<SecureUrl, String> {
     }
 
     private fun isAllowedOrigin(url: String): Boolean =
-        allowedResourceOrigins.any { allowedUrl ->
-            url.contains(allowedUrl)
-        }
+        allowedResourceOrigins.contains("*") || allowedResourceOrigins.any { allowedUrl -> url.contains(allowedUrl) }
 }
