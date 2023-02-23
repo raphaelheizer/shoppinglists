@@ -10,7 +10,7 @@ import org.junit.jupiter.api.assertThrows
 class NoHtmlTests {
 
     private class TestClass(
-        @NoHtml
+        @field:NoHtml
         val prop: String
     )
 
