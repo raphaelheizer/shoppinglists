@@ -1,4 +1,4 @@
-package br.heizer.shoppinglists.infrastructure.handlers.exception
+package br.heizer.shoppinglists.infrastructure.handlers.exceptionhandlers
 
 import br.heizer.shoppinglists.infrastructure.security.user.exceptions.UserNotFoundException
 import jakarta.servlet.http.HttpServletRequest

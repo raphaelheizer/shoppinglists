@@ -6,7 +6,7 @@ class PasswordUtils {
 
     companion object {
         private const val passwordStrengthValidation =
-            "^(?!\\[\\]\\<\\>\\;\\/\\\\)(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#\$%^&*()_+])[A-Za-z\\d!@#\$%^&*_+.]*\$"
+            "^(?!\\[]<>;/\\\\)(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#\$%^&*()_+])[A-Za-z\\d!@#\$%^&*_+.]*\$"
         const val minimumLength = 8
 
         @Throws(IllegalArgumentException::class)
@@ -22,11 +22,12 @@ class PasswordUtils {
         }
 
         @Throws(IllegalArgumentException::class)
-        fun validate(password: String?) =
+        fun validate(password: String?) {
             password.also {
-                if (it == null) throw IllegalArgumentException("Password must not be null")
+                it ?: throw IllegalArgumentException("Password must not be null")
                 validateLength(it)
                 validatePasswordStrength(it)
             }
+        }
     }
 }

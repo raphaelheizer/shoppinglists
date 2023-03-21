@@ -1,8 +1,11 @@
+@file:Suppress("SpringBootApplicationProperties")
+
 package br.heizer.shoppinglists.infrastructure.security.validators.secureurl
 
 import br.heizer.shoppinglists.TestUtils
 import br.heizer.shoppinglists.ValidationTestException
 import br.heizer.shoppinglists.infrastructure.validators.secureurl.SecureUrl
+import br.heizer.shoppinglists.infrastructure.validators.secureurl.SecureUrlUtils
 import br.heizer.shoppinglists.infrastructure.validators.secureurl.SecureUrlValidator
 import jakarta.validation.Validator
 import org.junit.jupiter.api.*
@@ -14,6 +17,7 @@ import org.springframework.context.annotation.Import
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean
 
+@Suppress("unused")
 private class TestClass(
     @field:SecureUrl
     private val secureUrl: String
@@ -22,7 +26,7 @@ private class TestClass(
 @ExtendWith(SpringExtension::class)
 @Import(LocalValidatorFactoryBean::class)
 @SpringBootTest(
-    classes = [TestUtils::class, SecureUrl::class, SecureUrlValidator::class],
+    classes = [TestUtils::class, SecureUrl::class, SecureUrlValidator::class, SecureUrlUtils::class],
     properties = ["security.web.cors.allowed-resource-origins = *"],
 )
 class SecureUrlTests {
@@ -66,8 +70,13 @@ class SecureUrlTests {
 @ExtendWith(SpringExtension::class)
 @Import(LocalValidatorFactoryBean::class)
 @SpringBootTest(
-    classes = [TestUtils::class, SecureUrl::class, SecureUrlValidator::class],
-    properties = ["security.web.cors.allowed-resource-origins = allowed-domain, allowed-domain-other"],
+    classes = [TestUtils::class, SecureUrl::class, SecureUrlValidator::class, SecureUrlUtils::class],
+    properties = [
+        "security.web.cors.allowed-resource-origins = allowed-domain, allowed-domain-other, " +
+                "https://allowed-domain, https://www.allowed-domain.com, subdomain.allowed-domain, " +
+                "https://subdomain.allowed-domain, https://www.subdomain.allowed-domain.com",
+        "security.web.cors.allowed-protocols = https, wss"
+    ],
 )
 private class SecureUrlTestsFixedResourceName {
 

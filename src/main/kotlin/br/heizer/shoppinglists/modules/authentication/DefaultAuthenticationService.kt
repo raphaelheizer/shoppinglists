@@ -75,6 +75,7 @@ class DefaultAuthenticationService(
             val loadedUser = usersRepository.findByEmail(principal.name) ?: throw UserNotFoundException()
 
             loadedUser.password = encodedPassword
+
             usersRepository.save(loadedUser)
         } else
             throw CredentialException("Invalid credentials")

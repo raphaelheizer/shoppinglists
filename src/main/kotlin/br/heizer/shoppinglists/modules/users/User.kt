@@ -20,6 +20,6 @@ class User(
 
     override val roles: List<Role>,
 
-    avatarUrl: String
+    val avatarUrl: String
 
 ) : UserCredentials

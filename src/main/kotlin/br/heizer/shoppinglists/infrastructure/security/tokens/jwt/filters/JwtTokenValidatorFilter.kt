@@ -22,10 +22,12 @@ class JwtTokenValidatorFilter(
     private val applicationName: String,
     private val jwtProperties: JwtProperties
 ) : OncePerRequestFilter() {
-    private val bearerTokenPrefix = "Bearer "
+
+    companion object {
+        private const val bearerTokenPrefix = "Bearer "
+    }
 
     @Throws(ServletException::class, IOException::class)
-
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
         val jwt = request.getHeader(jwtProperties.header)
         if (null != jwt) {

@@ -65,7 +65,7 @@ tasks.create("fatJar", type = Jar::class) {
     archivesName.set("${project.name}-deployable")
 
     manifest {
-        attributes["Implementation-Title"] = "Deploable ${project.name} JAR"
+        attributes["Implementation-Title"] = "Deployable ${project.name} JAR"
         attributes["Implementation-Version"] = archiveVersion
         attributes["Main-Class"] = "br.heizer.ShoppinglistsApplicationKt"
     }

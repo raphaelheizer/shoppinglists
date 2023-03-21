@@ -13,6 +13,8 @@ server:
 spring:
   application:
     name: ShoppingLists
+    user:
+      default-avatar-url:
 
   data:
     mongodb:
@@ -34,6 +36,7 @@ security:
       allow-credentials: true
       allowed-origins: ${FRONT_END_ORIGIN}
       allowed-resource-origins: ${ALLOWED_RESOURCE_ORIGINS}
+      allowed-protocols: ${ALLOWED_PROTOCOLS}
       allowed-methods: GET, POST, PATCH, PUT, DELETE, OPTIONS
       exposed-headers: ${AUTH_JWT_HEADER}
       allowed-headers: \*
