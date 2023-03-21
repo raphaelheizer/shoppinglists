@@ -4,7 +4,8 @@ import jakarta.validation.Constraint
 import jakarta.validation.Payload
 import kotlin.reflect.KClass
 
-@Target(AnnotationTarget.FIELD, AnnotationTarget.CLASS,
+@Target(
+    AnnotationTarget.FIELD,
     AnnotationTarget.PROPERTY,
     AnnotationTarget.VALUE_PARAMETER,
     AnnotationTarget.PROPERTY_GETTER

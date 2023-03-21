@@ -6,10 +6,11 @@ import jakarta.validation.ConstraintValidatorContext
 class NoHtmlValidator : ConstraintValidator<NoHtml, String> {
 
     companion object {
-        const val invalidChars = "^<.*/?>"
+        val invalidChars = charArrayOf('<','.','*','/','?','>')
     }
-    override fun isValid(value: String?, context: ConstraintValidatorContext?): Boolean = doesNotContainHtml(value)
+    override fun isValid(value: String?, context: ConstraintValidatorContext?): Boolean = !containsHtml(value)
 
-    private fun doesNotContainHtml(value: String?): Boolean = (value?.matches(invalidChars.toRegex())?.not()) ?: true
+    private fun containsHtml(value: String?): Boolean =
+        ((value?.indexOfAny(invalidChars) ?: -1) > -1)
 
 }

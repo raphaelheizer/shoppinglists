@@ -15,19 +15,10 @@ class NoHtmlTests {
         val prop: String
     )
 
-    @NoHtml
-    private class TestClassAnnotated(
-        val prop: String
-    )
-
     @Test
     fun `validation should succeed`() {
         assertDoesNotThrow {
             TestUtils.validateValidator(TestClass(prop = "There is no script tag"), "prop")
-        }
-
-        assertDoesNotThrow {
-            TestUtils.validateValidator(TestClassAnnotated(prop = "There is no script tag"), "prop")
         }
     }
 
@@ -35,10 +26,6 @@ class NoHtmlTests {
     fun `validation should fail for @NoHtml`() {
         val exception = assertThrows<ValidationTestException> {
             TestUtils.validateValidator(TestClass(prop = "<script>function anything { doStuff(); }</script>"), "prop")
-        }
-
-        assertThrows<ValidationTestException> {
-            TestUtils.validateValidator(TestClassAnnotated(prop = "<script>function anything { doStuff(); }</script>"), "prop")
         }
 
         assert(true) {

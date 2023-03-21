@@ -27,7 +27,7 @@ private class TestClass(
 @Import(LocalValidatorFactoryBean::class)
 @SpringBootTest(
     classes = [TestUtils::class, SecureUrl::class, SecureUrlValidator::class, SecureUrlUtils::class],
-    properties = ["security.web.cors.allowed-resource-origins = *"],
+    properties = ["security.web.cors.allowed-resource-origins = *", "security.web.cors.allowed-protocols = https, wss"],
 )
 class SecureUrlTests {
 

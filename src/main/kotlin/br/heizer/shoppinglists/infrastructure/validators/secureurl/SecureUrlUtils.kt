@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component
 class SecureUrlUtils {
 
     @Value("\${security.web.cors.allowed-resource-origins}")
-    val allowedResourceOrigins = setOf<String>()
+    private val allowedResourceOrigins = setOf<String>()
 
     @Value("\${security.web.cors.allowed-protocols}")
-    val allowedProtocols = setOf<String>()
+    private val allowedProtocols = setOf<String>()
 
     companion object {
         const val urlPrefixPattern = """://(?:\w*\.)?"""
@@ -24,9 +24,12 @@ class SecureUrlUtils {
         if (url == null) {
             false
         } else {
-            val protocols = "(${allowedProtocols.joinToString("|")})"
+            val protocols = if (allowedProtocols.isNotEmpty()) {
+                allowedProtocols.joinToString("|")
+            } else "https"
+
             url.matches(
-                Regex("$protocols$urlPrefixPattern$urlDomainPattern$pathsPattern$argumentsPattern"))
+                Regex("($protocols)$urlPrefixPattern$urlDomainPattern$pathsPattern$argumentsPattern"))
                     && isAllowedOrigin(url)
         }
 
