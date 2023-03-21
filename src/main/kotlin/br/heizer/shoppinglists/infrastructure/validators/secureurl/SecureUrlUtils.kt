@@ -37,12 +37,15 @@ class SecureUrlUtils {
         allowedResourceOrigins.contains("*") || allowedResourceOrigins.any { allowedUrl -> isInDomain(url, allowedUrl) }
 
     private fun isInDomain(url: String, allowedUrl: String): Boolean {
-        val (allowedUrlSubdomain, allowedUrlDomain) = extractUrlDomainName(allowedUrl)
         val (urlSubdomain, urlDomain) = extractUrlDomainName(url)
 
-        return if (!allowedUrl.contains(".")) {
-            urlDomain == allowedUrl
-        } else if (urlSubdomain != null) {
+        if (!allowedUrl.contains(".")) {
+            return urlDomain == allowedUrl
+        }
+
+        val (allowedUrlSubdomain, allowedUrlDomain) = extractUrlDomainName(allowedUrl)
+
+        return if (urlSubdomain != null) {
             urlSubdomain == allowedUrlSubdomain && urlDomain == allowedUrlDomain
         } else {
             urlDomain == allowedUrlDomain
