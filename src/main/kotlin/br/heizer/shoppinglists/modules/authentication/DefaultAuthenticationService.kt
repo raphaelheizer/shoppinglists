@@ -16,7 +16,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.security.Principal
-import java.util.*
 import javax.security.auth.login.CredentialException
 
 @Service
@@ -49,8 +48,7 @@ class DefaultAuthenticationService(
                     throw UserAlreadyExistsException()
             }
 
-        val uuid = UUID.randomUUID()
-        val password = encoder.encode(uuid.toString())
+        val password = signUpForm.password
         val defaultRole = Role.DEFAULT
 
         val user = User(
