@@ -36,7 +36,7 @@ class DefaultAuthenticationService(
                 val authToken =
                     AuthenticationToken(authentication.name, authentication.authorities.first().authority)
 
-                JwtUtilities
+                JwtUtilities()
                     .convert(authToken, jwtProperties.secret)
                     .build()
             }

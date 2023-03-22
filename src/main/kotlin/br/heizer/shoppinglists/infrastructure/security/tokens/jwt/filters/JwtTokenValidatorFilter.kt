@@ -49,7 +49,7 @@ class JwtTokenValidatorFilter(
                 jwtProperties.secret.toByteArray(UTF_8)
             )
 
-            val claims = JwtUtilities
+            val claims = JwtUtilities()
                 .parser
                 .requireIssuer(applicationName)
                 .requireSubject("jwt-token")

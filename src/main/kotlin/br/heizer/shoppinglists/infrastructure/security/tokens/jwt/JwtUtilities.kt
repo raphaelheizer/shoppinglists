@@ -8,49 +8,46 @@ import io.jsonwebtoken.security.Keys
 import java.util.*
 import javax.crypto.SecretKey
 
+
 internal class JwtUtilities {
-    companion object {
-        val builder: JwtBuilder = Jwts.builder()
-        val parser: JwtParserBuilder = Jwts.parserBuilder()
 
-        private var secret: String? = null
-        private var payload: Any? = null
+    val builder: JwtBuilder = Jwts.builder()
+    val parser: JwtParserBuilder = Jwts.parserBuilder()
 
-        @Suppress("UnusedReceiverParameter")
-        fun JwtBuilder.and() = JwtUtilities
+    private var secret: String? = null
+    private var payload: Any? = null
 
-        init {
-            setDefault()
+    init {
+        setDefault()
+    }
+
+    fun <T> convert(payload: T, secret: String): JwtUtilities {
+        extractClaims(payload)
+
+        if (this.secret == null) {
+            val key: SecretKey = Keys.hmacShaKeyFor(secret.toByteArray(Charsets.UTF_8))
+            builder.signWith(key)
         }
+        return this
+    }
 
-        fun <T> convert(payload: T, secret: String): Companion {
-            extractClaims(payload)
+    private fun setDefault() {
+        builder
+            .setSubject("jwt-token")
+            .setIssuedAt(Date())
+            .setExpiration(Date(Date().time + 30000000))
+    }
 
-            if (Companion.secret == null) {
-                val key: SecretKey = Keys.hmacShaKeyFor(secret.toByteArray(Charsets.UTF_8))
-                builder.signWith(key)
-            }
-            return this
-        }
+    fun build(): String {
+        payload = null
+        secret = null
+        return builder.compact()
+    }
 
-        private fun setDefault() {
-            builder
-                .setSubject("jwt-token")
-                .setIssuedAt(Date())
-                .setExpiration(Date(Date().time + 30000000))
-        }
-
-        fun build(): String {
-            payload = null
-            secret = null
-            return builder.compact()
-        }
-
-        @Suppress("UNCHECKED_CAST")
-        private fun <T> extractClaims(obj: T) {
-            val mapper = ObjectMapper()
-            val claims = mapper.convertValue(obj, Map::class.java) as Map<String, Any>
-            builder.addClaims(claims)
-        }
+    @Suppress("UNCHECKED_CAST")
+    private fun <T> extractClaims(obj: T) {
+        val mapper = ObjectMapper()
+        val claims = mapper.convertValue(obj, Map::class.java) as Map<String, Any>
+        builder.addClaims(claims)
     }
 }

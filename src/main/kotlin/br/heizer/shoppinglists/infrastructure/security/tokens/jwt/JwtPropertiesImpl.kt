@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 @Component
-class JwtPropertiesImpl : JwtProperties {
+class JwtPropertiesImpl(
     @Value("\${security.authorization.jwt.header}")
-    override lateinit var header: String
+    override val header: String,
 
     @Value("\${security.authorization.jwt.secret}")
-    override lateinit var secret: String
+    override val secret: String,
 
     @Value("\${security.authorization.jwt.ignore-paths}")
-    override lateinit var ignorePaths: Set<String>
-}
+    override val ignorePaths: Set<String>
+) : JwtProperties

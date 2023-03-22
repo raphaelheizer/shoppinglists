@@ -2,7 +2,6 @@ package br.heizer.shoppinglists.infrastructure.security.tokens.jwt.filters
 
 import br.heizer.shoppinglists.infrastructure.security.tokens.jwt.JwtProperties
 import br.heizer.shoppinglists.infrastructure.security.tokens.jwt.JwtUtilities
-import br.heizer.shoppinglists.infrastructure.security.tokens.jwt.JwtUtilities.Companion.and
 import jakarta.servlet.FilterChain
 import jakarta.servlet.ServletException
 import jakarta.servlet.http.HttpServletRequest
@@ -20,18 +19,23 @@ class JwtTokenGeneratorFilter(
 ) : OncePerRequestFilter() {
 
     @Throws(ServletException::class, IOException::class)
-    override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
+    override fun doFilterInternal(
+        request: HttpServletRequest,
+        response: HttpServletResponse,
+        filterChain: FilterChain
+    ) {
         val authentication: Authentication? = SecurityContextHolder.getContext().authentication
 
         if (null != authentication) {
             val jwt: String =
-                    JwtUtilities
-                        .builder
-                        .setIssuer(applicationName)
-                        .claim("username", authentication.name)
-                        .claim("authorities", populateAuthorities(authentication.authorities))
-                        .and()
-                        .build()
+                JwtUtilities()
+                    .apply {
+                        builder
+                            .setIssuer(applicationName)
+                            .claim("username", authentication.name)
+                            .claim("authorities", populateAuthorities(authentication.authorities))
+                    }
+                    .build()
 
             response.setHeader(jwtProperties.header, jwt)
         }
