@@ -3,10 +3,10 @@ package br.heizer.shoppinglists.infrastructure.security.user
 import br.heizer.shoppinglists.infrastructure.security.user.exceptions.UserNotFoundException
 import br.heizer.shoppinglists.modules.users.UserRepository
 import org.springframework.security.core.authority.SimpleGrantedAuthority
-import org.springframework.security.core.userdetails.User as CoreUserdetailsUser
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
+import org.springframework.security.core.userdetails.User as CoreUserdetailsUser
 
 @Service
 class UserDetailsService(private val userRepository: UserRepository) : UserDetailsService {
